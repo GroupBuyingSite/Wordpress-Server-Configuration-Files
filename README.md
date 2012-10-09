@@ -8,6 +8,16 @@ Launch EC2 Instance
 
 https://console.aws.amazon.com/ec2/home
 
+*Pre-configured AMI*
+I have published a public AMI that includes all of the work from below (varnish disabled). You may us this AMI (ami-0614a86f) to help you get off the ground faster, if you choose to use this AMI these are the steps you will need to follow:
+
+* Login
+* Install RDS Database Instance
+* Install/Configure WordPress
+* Optimizations
+
+
+*Start fresh*
 * To create a new instance, access the AWS Management Console and click the EC2 tab:
 * Choose an AMI in the classic instance wizard: I chose the Ubuntu Server 12.04.1 LTS AMI.
 * Instance details: Select the Instance Type you want to use. I chose Small (m1.large). http://s-v.me/K0GY
