@@ -201,3 +201,45 @@ Scroll through the cache options, selecting “PHP APC” at each opportunity an
 
 Hit “Save All Settings” then hit “Deploy”
 
+Varnish
+-------
+
+Not recommended unless you're able to manage it so it doesn't cache dynamic pages that should never be cached, e.g. the cart or checkout.
+
+> apt-get install varnish
+
+Edit /etc/varnish/default.vcl replace the contents with the file default.vcl file from github.
+
+Edit /etc/default/varnish
+
+Change the section
+
+> DAEMON_OPTS="-a :6081 \
+> -T localhost:6082 \
+> -f /etc/varnish/default.vcl \
+> -S /etc/varnish/secret \
+> -s malloc,256m"
+
+to
+
+> DAEMON_OPTS="-a :80 \
+> -T localhost:6082 \
+> -f /etc/varnish/default.vcl \
+> -S /etc/varnish/secret \
+> -s malloc,128m"
+
+Next, we need to edit the nginx configuration to listen on port 8080, instead of port 80 – Varnish is going to be running on port 80 instead.
+
+Edit /etc/nginx/conf.d/default.conf and replace
+
+> listen 80;
+
+with
+
+> listen 8080;
+
+Save the file, then run
+
+> service nginx restart
+> service varnish restart
+
